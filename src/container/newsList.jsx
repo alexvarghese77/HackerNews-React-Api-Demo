@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
 import axios from 'axios';
-import { ListGroup, ListGroupItem } from 'reactstrap';
+import { ListGroup, ListGroupItem} from 'reactstrap';
 
 export default  class NewsList extends Component{
     constructor()
