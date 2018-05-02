@@ -25,29 +25,28 @@ export default  class NewsList extends Component{
                  })
             }
         ).then(
-              () => {var newsarry=[];   
+              () => {
+                  var newsarry=[];   
               for(var i=0;i<10;i++)
               {
-                fetch('https://hacker-news.firebaseio.com/v0/item/'+this.state.topNews[i]+'.json').then(
+                var a=fetch('https://hacker-news.firebaseio.com/v0/item/'+this.state.topNews[i]+'.json').then(
                     results=>{
     
                         return results.json();
                     }
-                 ).then(
-                    data=>{
-                        newsarry.push(data);
-                        this.setState({
-                             newsDetails:newsarry
-                        })
-                    }
-    
-                    
-                 )
+                 );
+                 newsarry.push(a);
               }
+              Promise.all(newsarry).then((val)=>{
+
+                  this.setState({
+                    newsDetails:val
+                        })
+                })
             }
            
         )
-
+      
         
     }
     render()
@@ -57,7 +56,7 @@ export default  class NewsList extends Component{
         <div>
             <ListGroup>
                 { 
-                  this.state.newsDetails.length>0?this.state.newsDetails.map((news)=><ListGroupItem>{news.title}</ListGroupItem>):null   
+                  this.state.newsDetails.length>0?this.state.newsDetails.map((news)=><ListGroupItem tag="a" href={news.url} key={news.id}>{news.title}</ListGroupItem>):null   
                 } 
             </ListGroup>
         </div>

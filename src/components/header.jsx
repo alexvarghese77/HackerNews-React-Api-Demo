@@ -1,41 +1,78 @@
-import {Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import React from 'react';
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem } from 'reactstrap';
 
+export default class Header extends React.Component {
+  constructor(props) {
+    super(props);
 
-export default class Header extends React.Component{
-    constructor(props){
-        super(props)
-        this.toggleNavbar = this.toggleNavbar.bind(this);
+    this.toggle = this.toggle.bind(this);
     this.state = {
-      collapsed: true
+      isOpen: false
     };
-    }
-
-    toggleNavbar()
-    {
-        this.setState({
-            collapsed: !this.state.collapsed
-        })
-    }
-    render()
-    {
-        return(
-            <div>
-        <Navbar color="faded" light>
-          <NavbarBrand href="/" className="mr-auto">Hacker News</NavbarBrand>
-          <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-          <Collapse isOpen={!this.state.collapsed} navbar>
-            <Nav navbar>
+  }
+  toggle() {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
+  render() {
+    return (
+      <div>
+        <Navbar color="light" light expand="md">
+          <NavbarBrand href="/">Hacker News</NavbarBrand>
+          <NavbarToggler onClick={this.toggle} />
+          <Collapse isOpen={this.state.isOpen} navbar>
+            <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/components/">Components</NavLink>
+                <NavLink href="">Top</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+                <NavLink href="">New</NavLink>
               </NavItem>
+              <NavItem>
+                <NavLink href="">Best</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="">Ask</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="">Show</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="">Jobs</NavLink>
+              </NavItem>
+              <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav caret>
+                  Options
+                </DropdownToggle>
+                <DropdownMenu right>
+                  <DropdownItem>
+                    Option 1
+                  </DropdownItem>
+                  <DropdownItem>
+                    Option 2
+                  </DropdownItem>
+                  <DropdownItem divider />
+                  <DropdownItem>
+                    Reset
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
             </Nav>
           </Collapse>
         </Navbar>
       </div>
-        )
-    }
+    );
+  }
 }

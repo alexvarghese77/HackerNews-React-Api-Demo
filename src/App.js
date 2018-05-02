@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Header from './components/header'
 import NewsList from './container/newsList'
+import Pagination from './components/Pagination'
 
 class App extends Component {
   render() {
@@ -10,6 +11,7 @@ class App extends Component {
       <div>
         <Header/>
         <NewsList/>
+        <Pagination/>
       </div>
     );
   }
