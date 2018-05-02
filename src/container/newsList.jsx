@@ -1,5 +1,7 @@
 import React,{Component} from 'react'
 import { ListGroup, ListGroupItem} from 'reactstrap';
+import Pagination from '../components/Pagination';
+
 
 export default  class NewsList extends Component{
     constructor()
@@ -51,17 +53,16 @@ export default  class NewsList extends Component{
     render()
     {
         console.log(this.state.newsDetails)
-                return(
-        <div>
-            <ListGroup>
-                { 
-                  this.state.newsDetails.length>0?this.state.newsDetails.map((news)=><ListGroupItem tag="a" href={news.url} key={news.id}>{news.title}</ListGroupItem>):null   
-                } 
-            </ListGroup>
-        </div>
-          
-            
-
+                return(    
+                 this.state.newsDetails.length>0?
+                 (
+                 <div>
+                 <ListGroup>
+                
+                 {this.state.newsDetails.map((news)=><ListGroupItem tag="a" href={news.url} key={news.id}>{news.title}</ListGroupItem>)  }
+                
+                </ListGroup>
+                 <Pagination/></div>):null   
         )
     }
 }
